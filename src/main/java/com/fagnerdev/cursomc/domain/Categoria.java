@@ -1,7 +1,6 @@
 package com.fagnerdev.cursomc.domain;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.persistence.*;
 import java.io.Serializable;

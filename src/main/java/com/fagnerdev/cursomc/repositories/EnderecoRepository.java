@@ -1,6 +1,6 @@
 package com.fagnerdev.cursomc.repositories;
 
-import com.fagnerdev.cursomc.domain.enums.Endereco;
+import com.fagnerdev.cursomc.domain.Endereco;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

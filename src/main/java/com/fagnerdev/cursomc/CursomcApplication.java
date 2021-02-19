@@ -1,7 +1,7 @@
 package com.fagnerdev.cursomc;
 
 import com.fagnerdev.cursomc.domain.*;
-import com.fagnerdev.cursomc.domain.enums.Endereco;
+import com.fagnerdev.cursomc.domain.Endereco;
 import com.fagnerdev.cursomc.domain.enums.TipoCliente;
 import com.fagnerdev.cursomc.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
