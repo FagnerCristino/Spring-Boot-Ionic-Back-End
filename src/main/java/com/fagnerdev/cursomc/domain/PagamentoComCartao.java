@@ -1,8 +1,13 @@
-package com.fagnerdev.cursomc.domain.enums;
+package com.fagnerdev.cursomc.domain;
 
 import com.fagnerdev.cursomc.domain.Pagamento;
 import com.fagnerdev.cursomc.domain.Pedido;
+import com.fagnerdev.cursomc.domain.enums.EstadoPagamento;
 
+import javax.persistence.Entity;
+
+
+@Entity
 public class PagamentoComCartao extends Pagamento {
 
     private static final long serialVersionUID = 5587217647321071722L;
