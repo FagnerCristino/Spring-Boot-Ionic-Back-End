@@ -1,6 +1,7 @@
 package com.fagnerdev.cursomc.controllers;
 
 import com.fagnerdev.cursomc.domain.Categoria;
+import com.fagnerdev.cursomc.dto.CategoriaDTO;
 import com.fagnerdev.cursomc.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/categorias")
@@ -44,6 +47,13 @@ public class CategoriaController {
         categoriaService.delete(id);
         return ResponseEntity.noContent().build();
 
+    }
+
+    @GetMapping
+    public ResponseEntity<List<CategoriaDTO>> findAll(){
+        List<Categoria> list = categoriaService.findAll();
+        List<CategoriaDTO> listDTO = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(listDTO);
     }
 
 }
