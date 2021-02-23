@@ -1,6 +1,8 @@
 package com.fagnerdev.cursomc.services;
 
 import com.fagnerdev.cursomc.domain.Categoria;
+import com.fagnerdev.cursomc.domain.Categoria;
+import com.fagnerdev.cursomc.domain.Categoria;
 import com.fagnerdev.cursomc.dto.CategoriaDTO;
 import com.fagnerdev.cursomc.repositories.CategoriaRepository;
 import com.fagnerdev.cursomc.services.exceptions.DataIntegrityException;
@@ -36,8 +38,13 @@ public class CategoriaService {
     }
 
     public Categoria update(Categoria obj) {
-        find(obj.getId());
-        return categoriaRepository.save(obj);
+        Categoria newObj = find(obj.getId());
+        updateData(newObj, obj);
+        return categoriaRepository.save(newObj);
+    }
+
+    private void updateData(Categoria newObj, Categoria obj) {
+        newObj.setNome(obj.getNome());
     }
 
     public void delete(Integer id) {
