@@ -59,7 +59,7 @@ public class ClienteController {
     @GetMapping
     public ResponseEntity<List<ClienteDTO>> findAll(){
         List<Cliente> list = clienteService.findAll();
-        List<ClienteDTO> listDTO = list.stream().map(obj -> new ClienteDTO(obj)).collect(Collectors.toList());
+        List<ClienteDTO> listDTO = list.stream().map(ClienteDTO::new).collect(Collectors.toList());
         return ResponseEntity.ok().body(listDTO);
     }
 
@@ -70,7 +70,7 @@ public class ClienteController {
             @RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
             @RequestParam(value = "direction", defaultValue = "ASC") String direction){
         Page<Cliente> list = clienteService.findPage(page, linesPerPage, orderBy, direction);
-        Page<ClienteDTO> listDTO = list.map(obj -> new ClienteDTO(obj));
+        Page<ClienteDTO> listDTO = list.map(ClienteDTO::new);
         return ResponseEntity.ok().body(listDTO);
     }
 
