@@ -1,37 +1,41 @@
 package com.fagnerdev.cursomc.controllers;
 
-import com.fagnerdev.cursomc.domain.Categoria;
+import com.fagnerdev.cursomc.controllers.utils.URL;
 import com.fagnerdev.cursomc.domain.Produto;
 import com.fagnerdev.cursomc.dto.ProdutoDTO;
-import com.fagnerdev.cursomc.dto.CategoriaDTO;
 import com.fagnerdev.cursomc.services.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping(value = "/Produtos")
+@RequestMapping(value = "/produtos")
 public class ProdutoController {
 
     @Autowired
-    private ProdutoService ProdutoService;
+    private ProdutoService produtoService;
 
-    /*@GetMapping(value = "/{id}")
-    public ResponseEntity<Produto> find(@PathVariable Integer id){
-        Produto obj = ProdutoService.find(id);
+    @RequestMapping(value="/{id}", method=RequestMethod.GET)
+    public ResponseEntity<Produto> find(@PathVariable Integer id) {
+        Produto obj = produtoService.find(id);
         return ResponseEntity.ok().body(obj);
-    }*/
+    }
 
- /*   @GetMapping(value = "/page")
+    @RequestMapping(method=RequestMethod.GET)
     public ResponseEntity<Page<ProdutoDTO>> findPage(
-            @RequestParam(value = "nome", defaultValue = "0") Integer nome,
-            @RequestParam(value = "categorias", defaultValue = "24") Integer categorias,
-            @RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
-            @RequestParam(value = "direction", defaultValue = "ASC") String direction) {
-        Page<Categoria> list = categoriaService.findPage(page, linesPerPage, orderBy, direction);
-        Page<CategoriaDTO> listDTO = list.map(obj -> new CategoriaDTO(obj));
-        return ResponseEntity.ok().body(listDTO);
-
-    }*/
+            @RequestParam(value="nome", defaultValue="") String nome,
+            @RequestParam(value="categorias", defaultValue="") String categorias,
+            @RequestParam(value="page", defaultValue="0") Integer page,
+            @RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage,
+            @RequestParam(value="orderBy", defaultValue="nome") String orderBy,
+            @RequestParam(value="direction", defaultValue="ASC") String direction) {
+        String nomeDecoded = URL.decodeParam(nome);
+        List<Integer> ids = URL.decodeIntList(categorias);
+        Page<Produto> list = produtoService.search(nomeDecoded, ids, page, linesPerPage, orderBy, direction);
+        Page<ProdutoDTO> listDto = list.map(ProdutoDTO::new);
+        return ResponseEntity.ok().body(listDto);
+    }
 }

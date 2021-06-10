@@ -1,5 +1,7 @@
 package com.fagnerdev.cursomc.dto;
 
+import com.fagnerdev.cursomc.domain.Produto;
+
 import java.io.Serializable;
 
 public class ProdutoDTO implements Serializable {
@@ -9,11 +11,15 @@ public class ProdutoDTO implements Serializable {
     private String nome;
     private Double preco;
 
-    public ProdutoDTO(Integer id, String nome, Double preco) {
-        this.id = id;
-        this.nome = nome;
-        this.preco = preco;
+    public ProdutoDTO() {
     }
+
+    public ProdutoDTO(Produto obj) {
+        id = obj.getId();
+        nome = obj.getNome();
+        preco = obj.getPreco();
+    }
+
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
